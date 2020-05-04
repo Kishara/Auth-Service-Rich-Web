@@ -46,15 +46,20 @@ public class PatientService {
 			preparedStmt.setString(11, NIC);
 			preparedStmt.setString(12, address);
 
-			
-			
 
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
-			output = "Inserted successfully";
+			
+			String newPatient = readPatient();
+			 output = "{\"status\":\"success\", \"data\": \"" +
+			 newPatient + "\"}"; 
+			//output = "Inserted successfully";
+			 
 		} catch (Exception e) {
-			output = "Error while inserting the patient.";
+			output = "{\"status\":\"error\", \"data\": "
+					+ "\"Error while inserting the Patient.\"}"; 
+			//output = "Error while inserting the patient.";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -111,11 +116,17 @@ public class PatientService {
 					
 					
 					// buttons
-					output += "<td><input name=\"btnUpdate\" type=\"button\""
-							+ " value=\"Update\" class=\"btn btn-secondary\"></td>"
-							+ "<td><form method=\"post\" action=\"patient.jsp\">"
-							+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"" + " class=\"btn btn-danger\">"
-							+ "<input name=\"ID\" type=\"hidden\" value=\"" + ID + "\">" + "</form></td></tr>";
+				/*
+				 * output += "<td><input name=\"btnUpdate\" type=\"button\"" +
+				 * " value=\"Update\" class=\"btn btn-secondary\"></td>" +
+				 * "<td><form method=\"post\" action=\"patient.jsp\">" +
+				 * "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"" +
+				 * " class=\"btn btn-danger\">" + "<input name=\"ID\" type=\"hidden\" value=\""
+				 * + ID + "\">" + "</form></td></tr>";
+				 */
+					
+					output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td> "
+							+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger' data-ID='"+ ID + "'>" + "</td></tr>"; 
 				}
 				con.close();
 				
