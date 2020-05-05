@@ -74,20 +74,31 @@ public class PatientAPI extends HttpServlet {
 
 	protected void doPut(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		Map paras = getParasMap(request);
-		 String output = patientService.updatePatient(
-		 paras.get("ID").toString(),
+		
+		String output = patientService.updatePatient(paras.get("hidPatientIDSave").toString(),
+		 paras.get("type").toString(),
+		 paras.get("email").toString(),
+		 paras.get("password").toString(),
 		 paras.get("contactNo").toString(),
+		 paras.get("firstName").toString(),
+		 paras.get("lastName").toString(),
+		 paras.get("DOB").toString(),
+		 paras.get("age").toString(),
+		 paras.get("sex").toString(),
+		 paras.get("NIC").toString(),
 		 paras.get("address").toString());
 		response.getWriter().write(output); 
 	}
 
+
+	
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		Map paras = getParasMap(request);
-		 String output = patientService.deletePatient(
-				 paras.get("ID").toString());
-		response.getWriter().write(output); 
+		 String output = patientService.deletePatient(paras.get("ID").toString()); 
+						response.getWriter().write(output); 
 	}
 
 }
