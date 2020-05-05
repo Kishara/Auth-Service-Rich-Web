@@ -33,18 +33,19 @@ $(document).on("click", "#btnSave", function(event) {
 	});
 });
 
-//DELETE ============================================
-$(document).on("click", ".btnRemove", function(event) {
-	$.ajax({
-		url : "PatientAPI",
-		type : "DELETE",
-		data : "ID=" + $(this).data("ID"),
-		dataType : "text",
-		complete : function(response, status) {
-			onPatientDeleteComplete(response.responseText, status);
-		}
+
+$(document).on('click', '.btnRemove', function(event){
+		 $.ajax({
+		 url : "PatientAPI",
+		 type : "DELETE",
+		 data : "ID=" + $(this).data("id"),
+		 dataType : "text",
+		 complete : function(response, status){
+			 onPatientDeleteComplete(response.responseText, status);
+		 }
 	});
 });
+
 
 //UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event)
@@ -159,35 +160,8 @@ function validatePatientForm() {
 	return true;
 }
 
-//function onPatientDeleteComplete(response, status) {
-//	
-//	if (status == "success") 
-//	{
-//		var resultSet = JSON.parse(response);
-//		
-//		if (resultSet.status.trim() == "success") 
-//		{
-//			$("#alertSuccess").text("Successfully deleted.");
-//			$("#alertSuccess").show();
-//			
-//			$("#divPatientGrid").html(resultSet.data);
-//		} else if (resultSet.status.trim() == "error") {
-//			
-//			$("#alertError").text(resultSet.data);
-//			$("#alertError").show();
-//		}
-//	} else if (status == "error") 
-//	{
-//		$("#alertError").text("Error while deleting.");
-//		$("#alertError").show();
-//	} else 
-//	{
-//		$("#alertError").text("Unknown error while deleting..");
-//		$("#alertError").show();
-//	}
-//}
-function onPatientDeleteComplete(response, status)
-{
+
+function onPatientDeleteComplete(response, status){
 if (status == "success")
  {
  var resultSet = JSON.parse(response);

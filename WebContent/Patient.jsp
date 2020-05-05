@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Patient</title>
+<title>Patient Registration</title>
 <link rel="stylesheet" href="Views/css/bootstrap.min.css">
 <script src="Components/jquery-3.2.1.min.js"></script>
 <script src="Components/patient.js"></script>

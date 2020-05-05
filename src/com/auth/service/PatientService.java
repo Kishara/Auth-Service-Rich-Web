@@ -130,7 +130,7 @@ public class PatientService {
 					
 
 					output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td> "
-							+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger'  data-ID= '" + ID + "'></td></tr>"; 
+							+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger'  data-id= '" + ID + "'></td></tr>"; 
 				}
 				con.close();
 				
