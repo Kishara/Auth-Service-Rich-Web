@@ -7,16 +7,16 @@ import java.sql.Statement;
 
 import com.auth.database.DBConnection;
 
-import com.auth.model.Patient;
+import com.auth.model.Doctor;
 
-public class PatientService {
+public class DoctorService {
 
 	
 	
-/* User type - Patient */
+/* User type - Doctor */
 	
-//Insert patient
-	public String insertPatient(String type, String email, String password, String contactNo, String firstName, String lastName, String DOB, String age, String sex, String NIC, String address) {
+//Insert Doctor
+	public String insertDoctor(String type, String email, String password, String contactNo, String firstName, String lastName, String NIC, String sex, String specialization) {
 		String output = "";
 		try {
 			Connection con = DBConnection.connect();
@@ -26,8 +26,8 @@ public class PatientService {
 			
 			
 			// create a prepared statement
-			String query = " insert into patient (`id`,`type`,`email`,`password`,`contactNo`,`firstName`,`lastName`,`dob`,`age`,`sex`,`nic`,`address`)"
-					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			String query = " insert into doctor (`id`,`type`,`email`,`password`,`contactNo`,`firstName`,`lastName`,`nic`,`sex`,`specialization`)"
+					+ " values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 			
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
@@ -40,32 +40,32 @@ public class PatientService {
 			preparedStmt.setString(5, contactNo);
 			preparedStmt.setString(6, firstName);
 			preparedStmt.setString(7, lastName);
-			preparedStmt.setString(8, DOB);
-			preparedStmt.setString(9, age);
-			preparedStmt.setString(10, sex);
-			preparedStmt.setString(11, NIC);
-			preparedStmt.setString(12, address);
+			preparedStmt.setString(8, NIC);
+			preparedStmt.setString(9, sex);
+			preparedStmt.setString(10, specialization);
 
 
 			// execute the statement
 			preparedStmt.execute();
 			con.close();
 			
-			String newPatient = readPatient();
+			String newDoctor = readDoctor();
 			 output = "{\"status\":\"success\", \"data\": \"" +
-			 newPatient + "\"}"; 
+			 newDoctor + "\"}"; 
+			
 			 
 		} catch (Exception e) {
 			output = "{\"status\":\"error\", \"data\": "
-					+ "\"Error while inserting the Patient.\"}"; 
+					+ "\"Error while inserting the Doctor.\"}"; 
+		
 			System.err.println(e.getMessage());
 		}
 		return output;
 	}
 		
 
-//Read patient list	
-	public String readPatient() {
+//Read Doctor list	
+	public String readDoctor() {
 			String output = "";
 			try {
 				Connection con = DBConnection.connect();
@@ -75,11 +75,11 @@ public class PatientService {
 				
 				
 				// Prepare the html table to be displayed
-				output = "<table border='1'><tr><th>User type</th><th>Patient Email</th><th>Password</th><th>Contact no</th>"
-						+ "<th>First name</th><th>Last name</th><th>DOB</th><th>Age</th><th>sex</th><th>NIC</th><th>Address</th>"
+				output = "<table border='1'><tr><th>User type</th><th>Doctor Email</th><th>Password</th><th>Contact no</th>"
+						+ "<th>First name</th><th>Last name</th><th>NIC</th><th>Sex</th><th>Specialization</th>"
 						+ "<th>Update</th><th>Remove</th></tr>";
 				
-				String query = "select * from patient";
+				String query = "select * from doctor";
 				Statement stmt = con.createStatement();
 				ResultSet rs = stmt.executeQuery(query);
 				
@@ -93,24 +93,20 @@ public class PatientService {
 					String contactNo = rs.getString("contactNo");
 					String firstName = rs.getString("firstName");
 					String lastName = rs.getString("lastName");
-					String DOB = rs.getString("DOB");
-					String age = rs.getString("age");
-					String sex = rs.getString("sex");
 					String NIC = rs.getString("NIC");
-					String address = rs.getString("address");
+					String sex = rs.getString("sex");
+					String specialization = rs.getString("specialization");
 					
 					// Add into the HTML table
-					output += "<tr><td><input id='hidPatientIDUpdate' name='hidPatientIDUpdate' type='hidden' value='" + ID + "'>" + type + "</td>";
+					output += "<tr><td><input id='hidDoctorIDUpdate' name='hidDoctorIDUpdate' type='hidden' value='" + ID + "'>" + type + "</td>";
 					output += "<td>" + email + "</td>";
 					output += "<td>" + password + "</td>";
 					output += "<td>" + contactNo + "</td>";
 					output += "<td>" + firstName + "</td>";
 					output += "<td>" + lastName + "</td>";
-					output += "<td>" + DOB + "</td>";
-					output += "<td>" + age + "</td>";
-					output += "<td>" + sex + "</td>";
 					output += "<td>" + NIC + "</td>";
-					output += "<td>" + address + "</td>";
+					output += "<td>" + sex + "</td>";
+					output += "<td>" + specialization + "</td>";
 					
 					
 					// buttons
@@ -123,7 +119,7 @@ public class PatientService {
 				// Complete the html table
 				output += "</table>";
 			} catch (Exception e) {
-				output = "Error while reading the patient.";
+				output = "Error while reading the Doctor.";
 				System.err.println(e.getMessage());
 			}
 			return output;
@@ -131,8 +127,8 @@ public class PatientService {
 		}		
 			
 			
-//Patient update
-	public String updatePatient(String ID, String type, String email, String password, String contactNo, String firstName, String lastName, String DOB, String age, String sex, String NIC, String address) {
+//Doctor update
+	public String updateDoctor(String ID, String type, String email, String password, String contactNo, String firstName, String lastName, String NIC, String sex, String specialization) {
 				String output = "";
 				try {
 					Connection con = DBConnection.connect();
@@ -142,7 +138,7 @@ public class PatientService {
 					
 					
 					// create a prepared statement
-					String query = "UPDATE patient SET type=?, email=?,password=?,contactNo=?, firstName=?, lastName=?, DOB=?, age=?, sex=?, NIC=?, address=? WHERE ID=?";
+					String query = "UPDATE doctor SET type=?, email=?,password=?,contactNo=?, firstName=?, lastName=?, nic=?, sex=?, specialization=? WHERE ID=?";
 					PreparedStatement preparedStmt = con.prepareStatement(query);
 					// binding values
 					preparedStmt.setString(1, type);
@@ -151,25 +147,24 @@ public class PatientService {
 					preparedStmt.setString(4, contactNo);
 					preparedStmt.setString(5, firstName);
 					preparedStmt.setString(6, lastName);
-					preparedStmt.setString(7, DOB);
-					preparedStmt.setString(8, age);
-					preparedStmt.setString(9, sex);
-					preparedStmt.setString(10, NIC);
-					preparedStmt.setString(11, address);
-					preparedStmt.setInt(12, Integer.parseInt(ID));
+					preparedStmt.setString(7, NIC);
+					preparedStmt.setString(8, sex);
+					preparedStmt.setString(9, specialization);
+					preparedStmt.setInt(10, Integer.parseInt(ID));
 					
 					
 					// execute the statement
 					preparedStmt.execute();
 					con.close();
-					String newPatient = readPatient();
+					String newDoctor = readDoctor();
 					 output = "{\"status\":\"success\", \"data\": \"" +
-					 newPatient + "\"}"; 
+					 newDoctor + "\"}"; 
 					
 					
 				} catch (Exception e) {
 					output = "{\"status\":\"error\", \"data\":"
 							+ "\"Error while updating the item.\"}"; 
+					
 					System.err.println(e.getMessage());
 				}
 				return output;
@@ -177,8 +172,8 @@ public class PatientService {
 		
 		
 			
-//Delete existing patient
-	public String deletePatient(String ID) {
+//Delete existing Doctor
+	public String deleteDoctor(String ID) {
 					String output = "";
 					try {
 						Connection con = DBConnection.connect();
@@ -188,7 +183,7 @@ public class PatientService {
 						
 						
 						// create a prepared statement
-						String query = "delete from patient where id=?";
+						String query = "delete from doctor where id=?";
 						PreparedStatement preparedStmt = con.prepareStatement(query);
 						
 						
@@ -200,13 +195,15 @@ public class PatientService {
 						preparedStmt.execute();
 						con.close();
 						
-						String newPatient = readPatient();
+						String newDoctor = readDoctor();
 						 output = "{\"status\":\"success\", \"data\": \"" +
-						 newPatient + "\"}"; 
-						
+						 newDoctor + "\"}"; 
+
 					} catch (Exception e) {
 						output = "{\"status\":\"error\", \"data\":"
-								+ "\"Error while deleting the Patient.\"}"; 
+								+ "\"Error while deleting the Doctor.\"}"; 
+						
+						
 						System.err.println(e.getMessage());
 					}
 					return output;
@@ -215,23 +212,23 @@ public class PatientService {
 				
 				
 				
-//Retrieve  single patient
-	public static Patient getPatientDetails(String id) {
-					Patient patient = null;
+//Retrieve  single Doctor
+	public static Doctor getDoctorDetails(String id) {
+					Doctor doctor = null;
 					try {
 
 						Connection con = DBConnection.connect();
 
-						String getSql = "SELECT * FROM patient WHERE id = ? ";
-						PreparedStatement ps_getPatientDetails = con.prepareStatement(getSql);
-						ps_getPatientDetails.setInt(1, Integer.parseInt(id));
+						String getSql = "SELECT * FROM doctor WHERE id = ? ";
+						PreparedStatement ps_getDoctorDetails = con.prepareStatement(getSql);
+						ps_getDoctorDetails.setInt(1, Integer.parseInt(id));
 
-						ResultSet rs = ps_getPatientDetails.executeQuery();
+						ResultSet rs = ps_getDoctorDetails.executeQuery();
 
 						while (rs.next()) {
 
 							
-							patient = new Patient(Integer.parseInt(id), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),rs.getString(8) , rs.getString(9), rs.getString(10), rs.getString(11), rs.getString(12));
+							doctor = new Doctor(Integer.parseInt(id), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7),rs.getString(8) , rs.getString(9), rs.getString(10));
 
 						
 						}
@@ -240,7 +237,7 @@ public class PatientService {
 						e.printStackTrace();
 					}
 
-					return patient;
+					return doctor;
 				}
 
 				

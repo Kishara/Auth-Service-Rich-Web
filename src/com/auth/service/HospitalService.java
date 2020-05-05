@@ -49,12 +49,10 @@ public class HospitalService {
 			String newHospital = readHospital();
 			 output = "{\"status\":\"success\", \"data\": \"" +
 			 newHospital + "\"}"; 
-			//output = "Inserted successfully";
 			 
 		} catch (Exception e) {
 			output = "{\"status\":\"error\", \"data\": "
 					+ "\"Error while inserting the Hospital.\"}"; 
-			//output = "Error while inserting the Hospital.";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -102,19 +100,6 @@ public class HospitalService {
 					
 					
 					// buttons
-				
-					
-					/*
-					 * output += "<td><input name=\"btnUpdate\" type=\"button\"" +
-					 * " value=\"Update\" class=\"btn btn-secondary\"></td>" +
-					 * "<td><form method=\"post\" action=\"Hospital.jsp\">" +
-					 * "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"" +
-					 * " class=\"btn btn-danger\">" + "<input name=\"ID\" type=\"hidden\" value=\""
-					 * + ID + "\">" + "</form></td></tr>";
-					 */
-					
-					
-
 					output += "<td><input name='btnUpdate' type='button' value='Update' class='btnUpdate btn btn-secondary'></td> "
 							+ "<td><input name='btnRemove' type='button' value='Remove' class='btnRemove btn btn-danger'  data-id= '" + ID + "'></td></tr>"; 
 				}
@@ -162,12 +147,12 @@ public class HospitalService {
 					 output = "{\"status\":\"success\", \"data\": \"" +
 					 newHospital + "\"}"; 
 					
-					//output = "Updated successfully";
+				
 				} catch (Exception e) {
 					output = "{\"status\":\"error\", \"data\":"
 							+ "\"Error while updating the item.\"}"; 
 					
-					//output = "Error while updating the Hospital.";
+					
 					System.err.println(e.getMessage());
 				}
 				return output;
@@ -201,12 +186,12 @@ public class HospitalService {
 						String newHospital = readHospital();
 						 output = "{\"status\":\"success\", \"data\": \"" +
 						 newHospital + "\"}"; 
-						//output = "Deleted successfully";
+						
 					} catch (Exception e) {
 						output = "{\"status\":\"error\", \"data\":"
 								+ "\"Error while deleting the Hospital.\"}"; 
 						
-						//output = "Error while deleting the Hospital.";
+						
 						System.err.println(e.getMessage());
 					}
 					return output;

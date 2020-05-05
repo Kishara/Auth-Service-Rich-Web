@@ -33,7 +33,7 @@ $(document).on("click", "#btnSave", function(event) {
 	});
 });
 
-
+//DELETE ============================================
 $(document).on('click', '.btnRemove', function(event){
 		 $.ajax({
 		 url : "PatientAPI",
@@ -64,7 +64,7 @@ $(document).on("click", ".btnUpdate", function(event)
  $("#address").val($(this).closest("tr").find('td:eq(10)').text());
 }); 
 
-
+//SAVE ============================================
 function onPatientSaveComplete(response, status) {
 	if (status == "success") {
 		var resultSet = JSON.parse(response);
@@ -87,7 +87,7 @@ function onPatientSaveComplete(response, status) {
 	$("#formPatient")[0].reset();
 }
 
-// CLIENT-MODEL================================================================
+// VALIDATION================================================================
 function validatePatientForm() {
 	// type
 	if ($("#type").val().trim() == "") {
@@ -146,42 +146,26 @@ function validatePatientForm() {
 		return "Insert Password.";
 	}
 
-	// // is numerical value
-	// var tmpPrice = $("#itemPrice").val().trim();
-	// if (!$.isNumeric(tmpPrice)) {
-	// return "Insert a numerical value for Item Price.";
-	// }
-	// // convert to decimal price
-	// $("#itemPrice").val(parseFloat(tmpPrice).toFixed(2));
-	// // DESCRIPTION------------------------
-	// if ($("#itemDesc").val().trim() == "") {
-	// return "Insert Item Description.";
-	// }
 	return true;
 }
 
-
-function onPatientDeleteComplete(response, status){
-if (status == "success")
- {
- var resultSet = JSON.parse(response);
- if (resultSet.status.trim() == "success")
- {
- $("#alertSuccess").text("Successfully deleted.");
- $("#alertSuccess").show();
- $("#divPatientGrid").html(resultSet.data);
- } else if (resultSet.status.trim() == "error")
- {
- $("#alertError").text(resultSet.data);
- $("#alertError").show();
- }
- } else if (status == "error")
- {
- $("#alertError").text("Error while deleting.");
- $("#alertError").show();
- } else
- {
- $("#alertError").text("Unknown error while deleting..");
- $("#alertError").show();
- }
+//DELETE ============================================
+function onPatientDeleteComplete(response, status) {
+	if (status == "success") {
+		var resultSet = JSON.parse(response);
+		if (resultSet.status.trim() == "success") {
+			$("#alertSuccess").text("Successfully deleted.");
+			$("#alertSuccess").show();
+			$("#divPatientGrid").html(resultSet.data);
+		} else if (resultSet.status.trim() == "error") {
+			$("#alertError").text(resultSet.data);
+			$("#alertError").show();
+		}
+	} else if (status == "error") {
+		$("#alertError").text("Error while deleting.");
+		$("#alertError").show();
+	} else {
+		$("#alertError").text("Unknown error while deleting..");
+		$("#alertError").show();
+	}
 }
