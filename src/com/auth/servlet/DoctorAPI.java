@@ -1,16 +1,22 @@
 package com.auth.servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
 
+import com.auth.model.Doctor;
 import com.auth.service.DoctorService;
 
 @WebServlet("/DoctorAPI")
@@ -23,11 +29,12 @@ public class DoctorAPI extends HttpServlet {
 		super();
 
 	}
-
+	
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+			response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -45,8 +52,10 @@ public class DoctorAPI extends HttpServlet {
 				request.getParameter("specialization"));
 
 		response.getWriter().write(output);
+		
+		
+    }
 
-	}
 
 	// Convert request parameters to a Map
 	private static Map getParasMap(HttpServletRequest request){
@@ -102,4 +111,5 @@ public class DoctorAPI extends HttpServlet {
 			response.getWriter().write(output); 
 	}
 
+	
 }

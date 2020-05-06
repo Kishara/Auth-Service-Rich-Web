@@ -19,7 +19,7 @@
 				<form id="formPatient" name="formPatient">
 					<h1>Patient registration.</h1>
 				
-					Type:    	   <input id="type" name="type" type="text" class="form-control form-control-sm"> <br> 
+					Type:    	   <input id="type" name="type" type="text" class="form-control form-control-sm"  value="Patient" readonly> <br> 
 					First Name:    <input id="firstName" name="firstName" type="text" class="form-control form-control-sm"> <br> 
 					Last Name:     <input id="lastName" name="lastName" type="text" class="form-control form-control-sm"> <br> 
 					Date of birth: <input id="DOB" name="DOB" type="text" class="form-control form-control-sm"> <br> 

@@ -3,10 +3,11 @@ package com.auth.service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.auth.database.DBConnection;
-
+import com.auth.model.Doctor;
 import com.auth.model.Hospital;
 
 public class HospitalService {
@@ -228,5 +229,29 @@ public class HospitalService {
 					return hospital;
 				}
 
+	
+//Hospital login	
+		public Hospital checkLogin(String email, String password) throws SQLException, ClassNotFoundException {
+		
+			Hospital hospital = null;
+			
+			Connection con = DBConnection.connect();
+			
+			String sql = "SELECT * FROM hospital WHERE email = ? and password = ?";
+			PreparedStatement statement = con.prepareStatement(sql);
+			statement.setString(1, email);
+			statement.setString(2, password);
+			ResultSet result = statement.executeQuery();
+
+			if (result.next()) {
+				hospital = new Hospital();
+				hospital.setName(result.getString("name"));
+				hospital.setEmail(email);
 				
+			}
+
+			con.close();
+			return hospital;
+		}
+		
 }

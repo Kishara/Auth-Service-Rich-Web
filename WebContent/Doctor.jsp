@@ -20,7 +20,7 @@
 				<form id="formDoctor" name="formDoctor">
 					<h1>Doctor registration.</h1>
 				
-					Type:    	   <input id="type" name="type" type="text" class="form-control form-control-sm"> <br> 
+					Type:    	   <input id="type" name="type" type="text" class="form-control form-control-sm" value="Doctor" readonly> <br> 
 					First Name:    <input id="firstName" name="firstName" type="text" class="form-control form-control-sm"> <br> 
 					Last Name:     <input id="lastName" name="lastName" type="text" class="form-control form-control-sm"> <br>
 					NIC: 		   <input id="NIC" name="NIC" type="text" class="form-control form-control-sm"> <br>  

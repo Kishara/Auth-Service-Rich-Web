@@ -3,6 +3,7 @@ package com.auth.service;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.auth.database.DBConnection;
@@ -240,5 +241,29 @@ public class DoctorService {
 					return doctor;
 				}
 
+//Doctor login	
+	public Doctor checkLogin(String email, String password) throws SQLException, ClassNotFoundException {
+	
+		Doctor doctor = null;
+		
+		Connection con = DBConnection.connect();
+		
+		String sql = "SELECT * FROM doctor WHERE email = ? and password = ?";
+		PreparedStatement statement = con.prepareStatement(sql);
+		statement.setString(1, email);
+		statement.setString(2, password);
+		ResultSet result = statement.executeQuery();
+
+		if (result.next()) {
+			doctor = new Doctor();
+			doctor.setFirstName(result.getString("firstName"));
+			doctor.setEmail(email);
+			
+		}
+
+		con.close();
+		return doctor;
+	}
+	
 				
 }

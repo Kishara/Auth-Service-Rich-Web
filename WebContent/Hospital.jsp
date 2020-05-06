@@ -20,7 +20,7 @@
 				<form id="formHospital" name="formHospital">
 					<h1>Hospital registration.</h1>
 				
-					Type:    	   		<input id="type" name="type" type="text" class="form-control form-control-sm"> <br> 
+					Type:    	   		<input id="type" name="type" type="text" class="form-control form-control-sm"  value="Hospital" readonly> <br> 
 					Hospital Name:    	<input id="name" name="name" type="text" class="form-control form-control-sm"> <br> 
 					Hospital Address:   <input id="address" name="address" type="text" class="form-control form-control-sm"> <br> 
 					Email: 		   		<input id="email" name="email" type="text" class="form-control form-control-sm"> <br> 
