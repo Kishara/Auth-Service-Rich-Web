@@ -1,10 +1,10 @@
 # Auth-Service-Rich-Web
 
-##IT18035018
-##Hathamunage K. B. J
+## IT18035018
+## Hathamunage K. B. J
 
 
-######Authentication service have to manage and validate the login and sign up of the
+###### Authentication service have to manage and validate the login and sign up of the
 specific user type such as doctor, patient or the hospital.
 When one of the doctors wants to join to the Health care management system, he/she needs
 to provide the relevant details that the system asks and simply he/she can register to the
